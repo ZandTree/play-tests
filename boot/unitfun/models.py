@@ -1,17 +1,16 @@
-
 import uuid
 from django.db import models
-
 from autoslug import AutoSlugField
-from django.utils import timezone
+# from django.utils import timezone
 
 
 class Category(models.Model):
     name = models.CharField(max_length=120)
     slug = AutoSlugField(populate_from='name', unique=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True,
-                            blank=True, db_index=True, related_name='children'
-                            )
+                               blank=True, db_index=True, related_name='children'
+                               )
+
     class Meta:
         unique_together = (('parent', 'slug'),)
         verbose_name_plural = 'categories'

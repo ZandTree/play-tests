@@ -2,23 +2,24 @@ from django.test import TestCase
 
 from users.models import User
 
-"""
-username = models.CharField(_("Username"), unique=True, max_length=120)
-    email = models.EmailField(_("Email"), unique=True)
-    banned = models.BooleanField(default=False)
-    blackListEmail = models.BooleanField(default=False)
-
-
-"""
-
 
 class BasicUser(TestCase):
-    def test_fields(self):
-        """ check whether user obj has 2 required fields"""
-        obj = User()
-        obj.username = 'Mio'
-        obj.email ='mio@mail.com'
-        obj.save()
+    def setUp(self) -> None:
+        self.user = User()
+        self.user.username = 'Mio'
+        self.user.email = 'mio@mail.com'
+        self.user.save()
 
-        obj_record = User.objects.get(pk=1)
-        self.assertEqual(obj_record,obj)
+    def test_fields(self):
+        """ check methods to set boelean attrs to True"""
+        user_record = User.objects.get(pk=self.user.id)
+
+        self.assertEqual(user_record, self.user)
+        self.assertEqual(user_record.banned, False)
+        self.assertEqual(user_record.blackListEmail, False)
+
+        user_record.set_banned()
+        user_record.put_to_black_mail_list()
+
+        self.assertEqual(user_record.banned, True)
+        self.assertEqual(user_record.blackListEmail, True)

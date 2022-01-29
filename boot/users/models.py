@@ -12,5 +12,11 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
+    def set_banned(self):
+        self.banned = True
+
+    def put_to_black_mail_list(self):
+        self.blackListEmail = True
+
     def __str__(self):
         return self.username
