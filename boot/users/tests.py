@@ -12,7 +12,7 @@ class BasicUser(TestCase):
             username=self.faker.name().split(' ')[0],
             email=self.faker.email()
         )
-        print(self.user.username)
+
         self.user.save()
 
     def tearDown(self) -> None:
@@ -31,3 +31,20 @@ class BasicUser(TestCase):
 
         self.assertEqual(user_record.banned, True)
         self.assertEqual(user_record.blackListEmail, True)
+
+        """
+        self.faker.profile()
+        print(self.faker.profile().get('job'))
+        {'job': 'Animal technologist', 
+        'company': 'Harvey-Hernandez', 
+        'ssn': '556-31-4707', 
+        'residence': '50400 Martinez Corners\nLake Susan, IA 91325', 
+        'current_location': (Decimal('-59.034308'), 
+        Decimal('0.796582')), 'blood_group': 'AB+', 
+        'website': ['http://www.richardson-lee.net/', 
+        'http://www.villa-gardner.com/', 'https://www.thomas.com/', 
+        'http://jones.com/'], 'username': 'lgray', 
+        'name': 'Benjamin West', 'sex': 'M', 'address': '973 Moore Ways Apt.
+        218\nLake Ian, OR 17229', 'mail': 'matthewweber@hotmail.com', 
+        'birthdate': datetime.date(1936, 6, 7)}        
+        """

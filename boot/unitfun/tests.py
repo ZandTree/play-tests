@@ -26,6 +26,15 @@ class BasicUser(TestCase):
         self.categ = Category()
         self.categ.name = 'speeloed voor katten'
         self.categ.save()
+        # seed vals
+        #fake = Faker()
+        #Faker.seed(4321)
+        self.faker2 = Faker()
+        self.faker2.seed_instance(98)
+        self.categ2 = Category()
+        self.categ2.name = self.faker2.sentence(nb_words=1)
+        print('with seed categ:', self.categ2)
+        self.categ2.save()
 
         self.product = Product(
             title=self.faker.sentence(nb_words=2),
