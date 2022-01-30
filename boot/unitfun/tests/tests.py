@@ -1,7 +1,7 @@
 from django.test import TestCase
 from faker import Faker
 from unitfun.models import Category, Product
-from .categ_factory import CategoryFactory
+from .categ_factory import CategoryFactory, ProductFactory
 
 
 class BasicUser(TestCase):
@@ -20,18 +20,12 @@ class BasicUser(TestCase):
         self.category3 = CategoryFactory()
         self.category3.save()
 
-        self.product = Product(
-            title=self.faker.sentence(nb_words=2),
-            description=self.faker.sentence(nb_words=12),
-            categ=self.categ,
-            price=2.44
-
-        )
-        self.product.save()
+        self.product2 = ProductFactory()
+        self.product3 = ProductFactory()
+        self.product4 = ProductFactory()
+        self.product5 = ProductFactory()
 
     def test_fields(self):
         """ check whether categ slug correct"""
         self.assertEqual(self.categ.parent, None)
         self.assertEqual(self.category.parent, self.categ)
-
-
