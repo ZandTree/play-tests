@@ -31,10 +31,8 @@ class BasicUser(TestCase):
 
         self.assertEqual(user_record.banned, True)
         self.assertEqual(user_record.blackListEmail, True)
-
         """
-        self.faker.profile()
-        print(self.faker.profile().get('job'))
+        self.faker.profile().get('job')
         {'job': 'Animal technologist', 
         'company': 'Harvey-Hernandez', 
         'ssn': '556-31-4707', 
