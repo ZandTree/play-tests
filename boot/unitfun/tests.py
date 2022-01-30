@@ -1,14 +1,8 @@
 from django.test import TestCase
-
-from unitfun.models import Category
+from faker import Faker
+from unitfun.models import Category, Product
 
 """
-Category
-    name = models.CharField(max_length=120)
-    slug = AutoSlugField(populate_from='name', unique=True)
-    parent
-    
-
 class Product(models.Model):
     arrived_at = models.DateField(auto_now_add=True)
     title = models.CharField(max_length=250)
@@ -28,9 +22,23 @@ class Product(models.Model):
 class BasicUser(TestCase):
 
     def setUp(self) -> None:
+        self.faker = Faker()
         self.categ = Category()
         self.categ.name = 'speeloed voor katten'
         self.categ.save()
+
+        self.product = Product(
+            title=self.faker.sentence(nb_words=2),
+            description=self.faker.sentence(nb_words=12),
+            categ=self.categ,
+            price=2.44
+
+        )
+        self.product.save()
+
+    def tearDown(self) -> None:
+        self.product.delete()
+        self.categ.delete()
 
     def test_fields(self):
         """ check whether categ slug correct"""

@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from autoslug import AutoSlugField
+
 # from django.utils import timezone
 
 
