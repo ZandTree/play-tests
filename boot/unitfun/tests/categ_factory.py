@@ -5,6 +5,10 @@ from unitfun.models import Category, Product
 
 fk = Faker()
 
+# fk.pydecimal(l)
+# fk.word(ext_word_list=CATEGORIES)
+# fk.words(nb=3,ext_word_list=CATEGORIES,unique=True)
+
 
 class CategoryFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -17,10 +21,11 @@ class ProductFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Product
 
-    title = FuzzyText(length=12)  # different for obj's
-    description = factory.Faker('sentence')  # same for obj's
+    title = ' '.join(fk.words(nb=2))
+    description = FuzzyText(length=10)
+    # description = ' '.join(fk.words(nb=5))
     categ = factory.SubFactory(CategoryFactory)
-    price = FuzzyDecimal(.00, 1000.00, 2)
+    price = fk.pydecimal(left_digits=4,right_digits=2,min_value=0.00,max_value=1000)
     sale = FuzzyChoice(choices=[False, False, False, True])
 
     # @factory.post_generation
@@ -28,5 +33,5 @@ class ProductFactory(factory.django.DjangoModelFactory):
     #     if not create:
     #         return
     #     print('do smth tomorrow')
-    #     obj.title + some random
+    #     obj.title + some rand
 
