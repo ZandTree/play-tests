@@ -9,20 +9,20 @@ class BasicUser(TestCase):
 
     def setUp(self) -> None:
         self.faker = Faker()
-
-        # print(self.faker.pydecimal(left_digits=4,right_digits=2,min_value=0.00,max_value=1000))
-        # print(self.faker.word(ext_word_list=CATEGORIES))
-        # print(self.faker.words(nb=3,ext_word_list=CATEGORIES,unique=True))
-
+        # name = self.faker.ecomm_categs()
+        # print('name is :',name)
         self.categ = Category()
         self.categ.name = 'speeloed voor katten'
         self.categ.save()
 
         self.category = CategoryFactory(parent=self.categ)
+        print(self.category.name)
         self.category.save()
         self.category2 = CategoryFactory(parent=self.categ)
+        print(self.category2.name)
         self.category2.save()
         self.category3 = CategoryFactory()
+        print(self.category3.name)
         self.category3.save()
 
         self.product2 = ProductFactory()
